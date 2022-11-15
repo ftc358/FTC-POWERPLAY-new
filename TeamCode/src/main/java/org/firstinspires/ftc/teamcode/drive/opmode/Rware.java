@@ -30,33 +30,15 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-/**
- * This file works in conjunction with the External Hardware Class sample called: ExternalHardwareClass.java
- * Please read the explanations in that Sample about how to use this class definition.
- *
- * This file defines a Java Class that performs all the setup and configuration for a sample robot's hardware (motors and sensors).
- * It assumes three motors (left_drive, right_drive and arm) and two servos (left_hand and right_hand)
- *
- * This one file/class can be used by ALL of your OpModes without having to cut & paste the code each time.
- *
- * Where possible, the actual hardware objects are "abstracted" (or hidden) so the OpMode code just makes calls into the class,
- * rather than accessing the internal hardware directly. This is why the objects are declared "private".
- *
- * Use Android Studio to Copy this Class, and Paste it into your team's code folder with *exactly the same name*.
- *
- * Or.. In OnBot Java, add a new file named Rware.java, drawing from this Sample; select Not an OpMode.
- * Also add a new OpMode, drawing from the Sample ExternalHardwareClass.java; select TeleOp.
- *
- */
-
 public class Rware {
-
+    Rware r = new Rware();
     /* Declare OpMode members. */
 
     // Define Motor and Servo objects  (Make them private so they can't be accessed externally)
@@ -64,16 +46,17 @@ public class Rware {
     public DcMotor leftBackDrive = null;
     public DcMotor rightFrontDrive = null;
     public DcMotor rightBackDrive = null;
-    /*
-    private CRServo s1 = null;
-    private CRServo s2 = null;
-    private Servo s3 = null;
-    private Servo s4 = null;
-    private DcMotor liftmotorright = null;
-    private DcMotor liftmotorleft = null;
-    */
 
-
+    public CRServo s1 = null;
+    public CRServo s2 = null;
+    public Servo s3 = null;
+    public Servo s4 = null;
+    public DcMotor liftmotorright = null;
+    public DcMotor liftmotorleft = null;
+    public CRServo s5 = null;
+    public CRServo s6 = null;
+    public Servo s7 = null;
+    public Servo s8 = null;
     // Define a constructor that allows the OpMode to pass a reference to itself.
     public Rware() {
 
@@ -86,35 +69,45 @@ public class Rware {
      * All of the hardware devices are accessed via the hardware map, and initialized.
      */
     public void init(HardwareMap HwMap) {
-                /*
-        s1  = hardwareMap.get(CRServo.class, "s1");
-        s2  = hardwareMap.get(CRServo.class, "s2");
-        s3 = hardwareMap.get(Servo.class, "s3");
-        s4 = hardwareMap.get(Servo.class, "s4");
-        */
+
+        s1  = HwMap.get(CRServo.class, "s1"); //intake
+        s2  = HwMap.get(CRServo.class, "s2");
+        s3 = HwMap.get(Servo.class, "s3"); //claw
+        s4 = HwMap.get(Servo.class, "s4");
+        s5 = HwMap.get(CRServo.class, "sl"); //claw neck
+        s6 = HwMap.get(CRServo.class, "sr");
+        s7 = HwMap.get(Servo.class, "s7"); //thing that goes in and out
+        s8 = HwMap.get(Servo.class, "s8");
+
 
         leftFrontDrive = HwMap.get(DcMotor.class, "lf");
         leftBackDrive = HwMap.get(DcMotor.class, "lb");
         rightFrontDrive = HwMap.get(DcMotor.class, "rf");
         rightBackDrive = HwMap.get(DcMotor.class, "rb");
-        /*
-        liftmotorleft = hardwareMap.get(DcMotor.class, "m1");
-        liftmotorright = hardwareMap.get(DcMotor.class, "m2");
 
-         */
+        liftmotorleft = HwMap.get(DcMotor.class, "m1");
+        liftmotorright = HwMap.get(DcMotor.class, "m2");
+
+
         rightBackDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftBackDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFrontDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        /*
+
         liftmotorleft.setDirection(DcMotor.Direction.REVERSE);
         s2.setDirection(DcMotorSimple.Direction.REVERSE);
         s3.setPosition(0.4);
         s4.setPosition(0.1);
+        s7.setPosition(0);
+        s8.setPosition(1);
+        r.leftBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        r.rightFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        r.leftFrontDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        r.rightBackDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-         */
+
     }
 
 
