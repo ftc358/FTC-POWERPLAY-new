@@ -127,10 +127,6 @@ public class driveleft extends LinearOpMode {
             telemetry.update();
             drive(-1,0,0);
         }
-
-
-
-
         // Step 2:  Spin right for 1.3 seconds
 
         runtime.reset();
